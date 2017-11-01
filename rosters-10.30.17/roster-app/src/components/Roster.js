@@ -14,8 +14,11 @@ class Roster extends Component {
             rosters: []
         }
     }
+    componentDidMount(){
+        this.getRoster();
+    }
 
-    async componentDidMount() {
+    async getRoster() {
         try {
             let response = await fetch(getRosters);
             let responseJson = await response.json();

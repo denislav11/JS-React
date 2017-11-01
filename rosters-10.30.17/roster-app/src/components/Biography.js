@@ -12,29 +12,26 @@ class Biography extends Component {
             id: 0,
             char: {}
         }
-
-        this.viewBiography = ({ id }) => {
-            this.setState({ id: id })
-            this.getChar({ id });
-        }
-
-        this.getChar = ({ id }) => {
-            fetch(characterBio + id)
-                .then(response => {
-                    response.json()
-                        .then(responseJson => {
-                            this.setState({
-                                char: responseJson
-                            });
-                        })
-                })
-        }
     }
 
     componentDidMount() {
         observer.addFunc('viewBiography', this.viewBiography);
     }
-
+    viewBiography = ({ id }) => {
+        this.setState({ id: id })
+        this.getChar({ id });
+    }
+    getChar = ({ id }) => {
+        fetch(characterBio + id)
+            .then(response => {
+                response.json()
+                    .then(responseJson => {
+                        this.setState({
+                            char: responseJson
+                        });
+                    })
+            })
+    }
 
     render() {
         let html;

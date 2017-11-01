@@ -12,32 +12,31 @@ class Slider extends Component {
             imageId: 0,
             imageUrl: ''
         }
-
-        this.getEpisode = (id) => {
-            fetch(episodePreview + id)
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    this.setState({
-                        imageUrl: responseJson.url,
-                        imageId: responseJson.id
-                    });
-                })
-        }
-
-        this.changeSlide = (direction) => {
-            let id = Number(this.state.imageId);
-            if (direction === 'left') {
-                id -= 1;
-            } else if (direction === 'right') {
-                id += 1;
-            }
-            this.getEpisode(id);
-        }
     }
-
 
     componentDidMount() {
         this.getEpisode(0);
+    }
+
+    changeSlide = (direction) => {
+        let id = Number(this.state.imageId);
+        if (direction === 'left') {
+            id -= 1;
+        } else if (direction === 'right') {
+            id += 1;
+        }
+        this.getEpisode(id);
+    }
+
+    getEpisode = (id) => {
+        fetch(episodePreview + id)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    imageUrl: responseJson.url,
+                    imageId: responseJson.id
+                });
+            })
     }
 
     render() {
